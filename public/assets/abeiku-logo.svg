@@ -1,0 +1,9 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="320" rx="24" fill="#0B5D1E" />
+  <path d="M160 50C147 62 136 82 136 102C136 125 147 141 160 149C173 141 184 125 184 102C184 82 173 62 160 50Z" stroke="white" stroke-width="8" />
+  <path d="M160 149V220" stroke="white" stroke-width="8" stroke-linecap="round" />
+  <path d="M126 147C105 145 87 151 74 165C90 171 109 175 129 172C134 163 133 154 126 147Z" stroke="white" stroke-width="8" />
+  <path d="M194 147C215 145 233 151 246 165C230 171 211 175 191 172C186 163 187 154 194 147Z" stroke="white" stroke-width="8" />
+  <text x="160" y="272" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="28" letter-spacing="10">ABEIKU</text>
+  <text x="160" y="296" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11" letter-spacing="8">FARMS</text>
+</svg>
