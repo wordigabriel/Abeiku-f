@@ -22,7 +22,7 @@ export function ContactPage() {
 
         <div className="space-y-4">
           <a
-            href="https://wa.me/233240001122"
+            href="https://wa.me/233550873047"
             target="_blank"
             rel="noreferrer"
             className="inline-block rounded-full bg-[#0B5D1E] px-6 py-3 font-semibold text-white"
