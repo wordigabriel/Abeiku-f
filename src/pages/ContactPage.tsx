@@ -29,7 +29,7 @@ export function ContactPage() {
           >
             Chat on WhatsApp
           </a>
-          <p className="text-slate-700">Phone: +233 24 000 1122 / +233 55 123 8890</p>
+          <p className="text-slate-700">Phone: +233 550873047 / +233 508180698</p>
           <p className="text-slate-700">Email: support@abeikufarms.com</p>
           <iframe
             title="Abeiku farms map"
