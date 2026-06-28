@@ -11,8 +11,22 @@ const paymentRoutes = require("./routes/paymentRoutes");
 
 const app = express();
 
-app.use(cors());
-app.use(express.json({ limit: "10mb" }));
+const allowedOrigins = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+  })
+);
+app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 
 app.get("/api/health", (_req, res) => {

@@ -262,7 +262,6 @@ export const initialUsers: User[] = [
     fullName: "Abeiku Farms Admin",
     email: "admin@abeikufarms.com",
     phone: "+233200000001",
-    password: "admin123",
     role: "admin",
   },
 ];

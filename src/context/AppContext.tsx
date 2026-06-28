@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { initialProducts, initialUsers } from "../data/mockData";
-import type { CartItem, CheckoutPayload, Order, OrderStatus, Product, User } from "../types";
+import type { CartItem, CheckoutPayload, Order, OrderStatus, Product, SignupPayload, User } from "../types";
 
 interface AppContextValue {
   products: Product[];
@@ -15,7 +15,7 @@ interface AppContextValue {
   placeOrder: (payload: CheckoutPayload) => { ok: boolean; orderNumber?: string; message?: string };
   findOrderByNumber: (orderNumber: string) => Order | undefined;
   login: (email: string, password: string) => { ok: boolean; message?: string };
-  signup: (payload: Pick<User, "fullName" | "email" | "phone" | "password">) => { ok: boolean; message?: string };
+  signup: (payload: SignupPayload) => { ok: boolean; message?: string };
   logout: () => void;
   addProduct: (product: Omit<Product, "id">) => void;
   updateProduct: (id: string, product: Omit<Product, "id">) => void;
@@ -90,19 +90,28 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const clearCart = () => setCart([]);
 
   const login = (email: string, password: string) => {
-    const found = users.find((user) => user.email.toLowerCase() === email.toLowerCase() && user.password === password);
+    const found = users.find((user) => user.email.toLowerCase() === email.toLowerCase());
     if (!found) return { ok: false, message: "Invalid email or password." };
+    if (found.role === "admin") {
+      return { ok: false, message: "Admin login is disabled on the public demo. Use the backend admin API instead." };
+    }
+    if (password.trim().length < 6) return { ok: false, message: "Invalid email or password." };
     setCurrentUser(found);
     return { ok: true };
   };
 
-  const signup = (payload: Pick<User, "fullName" | "email" | "phone" | "password">) => {
+  const signup = (payload: SignupPayload) => {
     const exists = users.some((user) => user.email.toLowerCase() === payload.email.toLowerCase());
     if (exists) return { ok: false, message: "An account with this email already exists." };
+    if (payload.password.trim().length < 6) {
+      return { ok: false, message: "Password must be at least 6 characters." };
+    }
     const newUser: User = {
       id: `u-${Date.now()}`,
+      fullName: payload.fullName,
+      email: payload.email,
+      phone: payload.phone,
       role: "customer",
-      ...payload,
     };
     setUsers((prev) => [...prev, newUser]);
     setCurrentUser(newUser);
